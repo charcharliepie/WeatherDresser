@@ -55,8 +55,8 @@ flutter:
   - assets/img/app-icon.png
   - assets/img/element-cloud.png
   - assets/img/element-sun.png
-  - assets/img/splashscreen-iPhoneX.png
-  - assets/img/splash-logo.png
+  - assets/img/launchscreen-iphonex.png
+  - assets/img/launchscreen-logo.png
   - assets/img/weather-clear.png
   - assets/img/weather-cloudy.png
   - assets/img/weather-rainy.png
@@ -64,12 +64,13 @@ flutter:
   - assets/img/weather-thunderstorm.png
 
   fonts:
-    - family: Poppins
+    - family: Monsterrat
       fonts:
-      - asset: assets/fonts/Poppins-Black.ttf
-      - asset: assets/fonts/Poppins-ExtraLight.ttf
-      - asset: assets/fonts/Poppins-Light.ttf
-      - asset: assets/fonts/Poppins-Regular.ttf
+      - asset: assets/fonts/Montserrat-Bold.ttf
+      - asset: assets/fonts/Montserrat-ExtraLight.ttf
+      - asset: assets/fonts/Montserrat-Italic.ttf
+      - asset: assets/fonts/Montserrat-Light.ttf
+      - asset: assets/fonts/Montserrat-Regular.ttf
 
   # fonts:
   #   - family: Schyler

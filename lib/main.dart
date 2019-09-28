@@ -1,100 +1,109 @@
 import 'package:flutter/material.dart';
-import 'package:animated_splash/animated_splash.dart';
 
-void main() {
-  Function duringSplash = () {
-    print('Something background process');
-    int a = 123 + 23;
-    print(a);
+import 'package:weather_dresser/widgets/Weather.dart';
+import 'package:weather_dresser/widgets/WeatherItem.dart';
 
-    if (a > 100)
-      return 1;
-    else
-      return 2;
-  };
+const MaterialColor grey = const MaterialColor(
+  0xFFEDEDED,
+  const <int, Color>{
+    50: const Color(0xFFEDEDED),
+    100: const Color(0xFFEDEDED),
+    200: const Color(0xFFEDEDED),
+    300: const Color(0xFFEDEDED),
+    400: const Color(0xFFEDEDED),
+    500: const Color(0xFFEDEDED),
+    600: const Color(0xFFEDEDED),
+    700: const Color(0xFFEDEDED),
+    800: const Color(0xFFEDEDED),
+    900: const Color(0xFFEDEDED),
+  },
+);
 
-  Map<int, Widget> op = {1: Home(), 2: HomeSt()};
+void main() => runApp(new MyApp());
 
-  runApp(MaterialApp(
-    home: AnimatedSplash(
-      imagePath: 'assets/img/splash-logo.png',
-      home: Home(),
-      customFunction: duringSplash,
-      duration: 3000,
-      type: AnimatedSplashType.BackgroundProcess,
-      outputAndHome: op,
-    ),
-  ));
-}
-
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-
-  Widget appBarTitle = new Text("");
+class MyApp extends StatelessWidget {
+  
+  Widget appBarTitle = new Text("天気ワードローブ");
   Icon actionIcon = new Icon(Icons.search);
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: appBarTitle,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        actions: <Widget>[
-          new IconButton(
-            icon: actionIcon,
-            color: Colors.black,
-            onPressed: () {
-              setState(() {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: '天気ワードローブ',
+      theme: ThemeData(
+        backgroundColor: Color(0xFFEDEDED),
+        primarySwatch: grey,
+      ),
+      home: Scaffold(
+        backgroundColor: Color(0xFFEDEDED),
+        appBar: new AppBar(
+          title: Text('天気ワードローブ'),
+          elevation: 0.0,
+          actions: <Widget>[
+            new IconButton(
+              icon: actionIcon,
+              onPressed: (){
                 if (this.actionIcon.icon == Icons.search) {
                   this.actionIcon = new Icon(Icons.close);
 
                   this.appBarTitle = new TextField(
                     style: new TextStyle(
-                      color: Colors.black,
+                      color: Color(0xFF2F2F2F),
                     ),
-                    decoration: new InputDecoration
-                    (
-                      prefixIcon: new Icon(Icons.search, color: Colors.black),
+                    decoration: new InputDecoration(
+                      prefixIcon:
+                          new Icon(Icons.search, color: Color(0xFF2F2F2F)),
                       labelText: "Enter city..",
-                      labelStyle: new TextStyle(color: Colors.black),
+                      labelStyle: new TextStyle(color: Color(0xFF2F2F2F)),
                       hintText: "Melbourne",
-                      hintStyle: new TextStyle(color: Colors.black),
+                      hintStyle: new TextStyle(color: Color(0xFF2F2F2F)),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFF2F2F2F)),
+                      ),
                     ),
                   );
-                }
-                else
-                {
+                } else {
                   this.actionIcon = new Icon(Icons.search);
-                  this.appBarTitle = new Text("");
+                  this.appBarTitle = new Text("天気ワードローブ");
                 }
-              });
-            },
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class HomeSt extends StatefulWidget {
-  @override
-  _HomeStState createState() => _HomeStState();
-}
-
-class _HomeStState extends State<HomeSt> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Home'),
+              },
+            )
+          ],
         ),
         body: Center(
-            child: Text('My Cool App home page 2',
-                style: TextStyle(color: Colors.black, fontSize: 20.0))));
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      // weather widget
+                      child: Weather(),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: OutlineButton(
+                        borderSide: BorderSide(color: Color(0xFF093BB1), width: 0.8),
+                        textColor: Colors.white,
+                        shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(0.0)),
+                        onPressed: () => null,
+                        child: Text(
+                          "  SEE MY OOTD  ",
+                          style: TextStyle(color: Color(0xFF093BB1), fontFamily: 'Monsterrat', fontWeight: FontWeight.w400),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ]
+          )
+        )
+      ),
+    );
   }
 }
