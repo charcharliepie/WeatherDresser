@@ -33,17 +33,51 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  Widget appBarTitle = new Text("");
+  Icon actionIcon = new Icon(Icons.search);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(0xFFEDEDED),
-          elevation: 0.0,
-          title: Text('Home'),
-        ),
-        body: Center(
-            child: Text('My Cool App',
-                style: TextStyle(color: Colors.black, fontSize: 20.0))));
+    return new Scaffold(
+      appBar: new AppBar(
+        title: appBarTitle,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        actions: <Widget>[
+          new IconButton(
+            icon: actionIcon,
+            color: Colors.black,
+            onPressed: () {
+              setState(() {
+                if (this.actionIcon.icon == Icons.search) {
+                  this.actionIcon = new Icon(Icons.close);
+
+                  this.appBarTitle = new TextField(
+                    style: new TextStyle(
+                      color: Colors.black,
+                    ),
+                    decoration: new InputDecoration
+                    (
+                      prefixIcon: new Icon(Icons.search, color: Colors.black),
+                      labelText: "Enter city..",
+                      labelStyle: new TextStyle(color: Colors.black),
+                      hintText: "Melbourne",
+                      hintStyle: new TextStyle(color: Colors.black),
+                    ),
+                  );
+                }
+                else
+                {
+                  this.actionIcon = new Icon(Icons.search);
+                  this.appBarTitle = new Text("");
+                }
+              });
+            },
+          )
+        ],
+      ),
+    );
   }
 }
 
@@ -56,7 +90,6 @@ class _HomeStState extends State<HomeSt> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
         appBar: AppBar(
           title: Text('Home'),
         ),
@@ -65,4 +98,3 @@ class _HomeStState extends State<HomeSt> {
                 style: TextStyle(color: Colors.black, fontSize: 20.0))));
   }
 }
-
