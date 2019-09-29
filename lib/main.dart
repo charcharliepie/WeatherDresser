@@ -1,78 +1,126 @@
 import 'package:flutter/material.dart';
+import 'package:animated_splash/animated_splash.dart';
 
-import 'package:weather_dresser/widgets/Weather.dart';
-import 'package:weather_dresser/widgets/WeatherItem.dart';
+import 'package:weather_dresser/widgets/weather.dart';
 
-const MaterialColor grey = const MaterialColor(
-  0xFFEDEDED,
-  const <int, Color>{
-    50: const Color(0xFFEDEDED),
-    100: const Color(0xFFEDEDED),
-    200: const Color(0xFFEDEDED),
-    300: const Color(0xFFEDEDED),
-    400: const Color(0xFFEDEDED),
-    500: const Color(0xFFEDEDED),
-    600: const Color(0xFFEDEDED),
-    700: const Color(0xFFEDEDED),
-    800: const Color(0xFFEDEDED),
-    900: const Color(0xFFEDEDED),
-  },
-);
+final bgColor = const Color(0xFFEAEAEA);
+final accentColor = const Color(0xFF093BB1);
+final txtColor = const Color(0xFF2F2F2F);
 
-void main() => runApp(new MyApp());
+void main() {
+  // do something while loading splash screen
+  Function duringSplash = () {
+    print('Something background process');
+    int a = 123 + 23;
+    print(a);
+
+    if (a > 100)
+      return 1;
+    else
+      return 2;
+  };
+
+  Map<int, Widget> op = {1: MyHomePage()};
+
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    theme: new ThemeData(
+      backgroundColor: txtColor,
+    ),
+    home: AnimatedSplash(
+      imagePath: 'assets/img/launchscreen-logo.png',
+      home: MyHomePage(),
+      customFunction: duringSplash,
+      duration: 3000,
+      type: AnimatedSplashType.BackgroundProcess,
+      outputAndHome: op,
+    ),
+  ));
+}
 
 class MyApp extends StatelessWidget {
-  
-  Widget appBarTitle = new Text("天気ワードローブ");
-  Icon actionIcon = new Icon(Icons.search);
-
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: '天気ワードローブ',
       theme: ThemeData(
-        backgroundColor: Color(0xFFEDEDED),
-        primarySwatch: grey,
+        primaryColor: txtColor,
+        accentColor: accentColor,
       ),
-      home: Scaffold(
-        backgroundColor: Color(0xFFEDEDED),
-        appBar: new AppBar(
-          title: Text('天気ワードローブ'),
-          elevation: 0.0,
-          actions: <Widget>[
-            new IconButton(
-              icon: actionIcon,
-              onPressed: (){
+      home: MyHomePage(title: '天気ワードローブ'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
+
+  final String title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  Widget appBarTitle = new Text("天気ワードローブ", style: TextStyle(color: txtColor),);
+  Icon actionIcon = new Icon(Icons.search);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: bgColor,
+      appBar: new AppBar(
+        title:  appBarTitle,
+        backgroundColor: bgColor,
+        elevation: 0.0,
+        actions: <Widget>[
+          new IconButton(
+            icon: actionIcon,
+            color: txtColor,
+            onPressed: () {
+              // display input field
+              setState(() {
                 if (this.actionIcon.icon == Icons.search) {
                   this.actionIcon = new Icon(Icons.close);
 
                   this.appBarTitle = new TextField(
                     style: new TextStyle(
-                      color: Color(0xFF2F2F2F),
+                      color: txtColor,
                     ),
                     decoration: new InputDecoration(
                       prefixIcon:
-                          new Icon(Icons.search, color: Color(0xFF2F2F2F)),
+                          new Icon(Icons.search, color: txtColor),
                       labelText: "Enter city..",
-                      labelStyle: new TextStyle(color: Color(0xFF2F2F2F)),
+                      labelStyle: new TextStyle(color: txtColor),
                       hintText: "Melbourne",
-                      hintStyle: new TextStyle(color: Color(0xFF2F2F2F)),
+                      hintStyle: new TextStyle(color: txtColor),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFF2F2F2F)),
+                        borderSide: BorderSide(color: txtColor),
                       ),
                     ),
                   );
                 } else {
                   this.actionIcon = new Icon(Icons.search);
-                  this.appBarTitle = new Text("天気ワードローブ");
+                  this.appBarTitle = new Text("天気ワードローブ", style: TextStyle(color: txtColor),);
                 }
-              },
-            )
-          ],
-        ),
-        body: Center(
-          child: Column(
+              });
+            },           
+          )
+        ],
+      ),
+      body: Center(
+        child: Column(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Expanded(
@@ -87,13 +135,13 @@ class MyApp extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: OutlineButton(
-                        borderSide: BorderSide(color: Color(0xFF093BB1), width: 0.8),
+                        borderSide: BorderSide(color: accentColor, width: 0.8),
                         textColor: Colors.white,
                         shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(0.0)),
                         onPressed: () => null,
                         child: Text(
                           "  SEE MY OOTD  ",
-                          style: TextStyle(color: Color(0xFF093BB1), fontFamily: 'Monsterrat', fontWeight: FontWeight.w400),
+                          style: TextStyle(color: accentColor, fontFamily: 'Monsterrat', fontWeight: FontWeight.w400),
                         ),
                       ),
                     ),
@@ -102,8 +150,8 @@ class MyApp extends StatelessWidget {
               ),
             ]
           )
-        )
-      ),
+        
+        ),
     );
   }
 }
