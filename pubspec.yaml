@@ -25,6 +25,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   flutter_launcher_icons: "^0.7.3"
   animated_splash: ^1.0.0
+  http: "^0.11.3+16"
+  line_icons: ^0.2.0
 
 dev_dependencies:
   flutter_test:
@@ -57,11 +59,24 @@ flutter:
   - assets/img/element-sun.png
   - assets/img/launchscreen-iphonex.png
   - assets/img/launchscreen-logo.png
-  - assets/img/weather-clear.png
-  - assets/img/weather-cloudy.png
-  - assets/img/weather-rainy.png
-  - assets/img/weather-snow.png
-  - assets/img/weather-thunderstorm.png
+  - assets/img/01d.png
+  - assets/img/01n.png
+  - assets/img/02d.png
+  - assets/img/02n.png
+  - assets/img/03d.png
+  - assets/img/03n.png
+  - assets/img/04d.png
+  - assets/img/04n.png
+  - assets/img/09d.png
+  - assets/img/09n.png
+  - assets/img/10d.png
+  - assets/img/10n.png
+  - assets/img/11d.png
+  - assets/img/11n.png
+  - assets/img/13d.png
+  - assets/img/13n.png
+  - assets/img/50d.png
+  - assets/img/50n.png
 
   fonts:
     - family: Monsterrat

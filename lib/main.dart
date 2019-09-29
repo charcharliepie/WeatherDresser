@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:animated_splash/animated_splash.dart';
+import 'dart:convert';
+import 'package:line_icons/line_icons.dart';
+
 
 import 'package:weather_dresser/widgets/weather.dart';
+import 'package:weather_dresser/model/weather_data.dart';
 
 final bgColor = const Color(0xFFEAEAEA);
 final accentColor = const Color(0xFF093BB1);
@@ -73,7 +78,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Widget appBarTitle = new Text("天気ワードローブ", style: TextStyle(color: txtColor),);
+  bool isLoading = false;
+  WeatherData weatherData;
+
+  @override
+  void initState() {
+    super.initState();
+
+    loadWeather();
+  }
+
+
+
+  Widget appBarTitle = new Text("天気ワードローブ", style: TextStyle(color: txtColor, fontWeight: FontWeight.w300),);
   Icon actionIcon = new Icon(Icons.search);
 
   @override
@@ -111,8 +128,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   );
                 } else {
-                  this.actionIcon = new Icon(Icons.search);
-                  this.appBarTitle = new Text("天気ワードローブ", style: TextStyle(color: txtColor),);
+                  this.actionIcon = new Icon(LineIcons.search);
+                  this.appBarTitle = new Text("天気ワードローブ", style: TextStyle(color: txtColor, fontWeight: FontWeight.w300),);
                 }
               });
             },           
@@ -130,7 +147,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       // weather widget
-                      child: Weather(),
+                      child: weatherData != null ? Weather(weather: weatherData) : Container(),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: isLoading ? CircularProgressIndicator(
+                        strokeWidth: 1.0,
+                        valueColor: new AlwaysStoppedAnimation(Colors.black),
+                      ) : IconButton(
+                        icon: new Icon(LineIcons.refresh),
+                        tooltip: 'Refresh',
+                        onPressed: loadWeather,
+                        color: txtColor,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -149,9 +178,32 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ]
-          )
-        
+          )   
         ),
     );
+  }
+
+  loadWeather() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    final lat = 40.730610;
+    final lon = -73.935242;
+    final weatherResponse = await http.get(
+        'https://api.openweathermap.org/data/2.5/weather?APPID=931dd482db9863c889f68196f104be72&lat=${lat
+            .toString()}&lon=${lon.toString()}');
+/*https://api.openweathermap.org/data/2.5/weather?APPID=931dd482db9863c889f68196f104be72&lat=40.730610&lon=-73.935242 */ 
+
+    if (weatherResponse.statusCode == 200) {
+      return setState(() {
+        weatherData = new WeatherData.fromJson(jsonDecode(weatherResponse.body));
+        isLoading = false;
+      });
+    }
+
+    setState(() {
+      isLoading = false;
+    });
   }
 }
