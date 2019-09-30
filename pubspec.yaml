@@ -28,7 +28,7 @@ dependencies:
   http: "^0.11.3+16"
   line_icons: ^0.2.0
   location: "^1.3.4"
-  simple_slider: "^0.0.1"
+  flutter_swiper : "^1.1.6"
 
 dev_dependencies:
   flutter_test:
@@ -79,47 +79,6 @@ flutter:
   - assets/img/13n.png
   - assets/img/50d.png
   - assets/img/50n.png
-
-  - assets/img/dress/cold-clear/accessory.jpeg
-  - assets/img/dress/cold-clear/bottom.jpeg
-  - assets/img/dress/cold-clear/top.jpeg
-  - assets/img/dress/cold-rain/accessory.jpeg
-  - assets/img/dress/cold-rain/bottom.jpeg
-  - assets/img/dress/cold-rain/top.jpeg
-  - assets/img/dress/cold-variable/accessory.jpeg
-  - assets/img/dress/cold-variable/bottom.jpeg
-  - assets/img/dress/cold-variable/top.jpeg
-
-  - assets/img/dress/fresh-clear/accessory.jpeg
-  - assets/img/dress/fresh-clear/bottom.jpeg
-  - assets/img/dress/fresh-clear/top.jpeg
-  - assets/img/dress/fresh-rain/accessory.jpeg
-  - assets/img/dress/fresh-rain/bottom.jpeg
-  - assets/img/dress/fresh-rain/top.jpeg
-  - assets/img/dress/fresh-variable/accessory.jpeg
-  - assets/img/dress/fresh-variable/bottom.jpeg
-  - assets/img/dress/fresh-variable/top.jpeg
-
-  - assets/img/dress/hot-clear/accessory.jpeg
-  - assets/img/dress/hot-clear/bottom.jpeg
-  - assets/img/dress/hot-clear/top.jpeg
-  - assets/img/dress/hot-rain/accessory.jpeg
-  - assets/img/dress/hot-rain/bottom.jpeg
-  - assets/img/dress/hot-rain/top.jpeg
-  - assets/img/dress/hot-variable/accessory.jpeg
-  - assets/img/dress/hot-variable/bottom.jpeg
-  - assets/img/dress/hot-variable/top.jpeg
-
-  - assets/img/dress/warm-clear/accessory.jpeg
-  - assets/img/dress/warm-clear/bottom.jpeg
-  - assets/img/dress/warm-clear/top.jpeg
-  - assets/img/dress/warm-rain/accessory.jpeg
-  - assets/img/dress/warm-rain/bottom.jpeg
-  - assets/img/dress/warm-rain/top.jpeg
-  - assets/img/dress/warm-variable/accessory.jpeg
-  - assets/img/dress/warm-variable/bottom.jpeg
-  - assets/img/dress/warm-variable/top.jpeg
-  
 
   fonts:
     - family: Monsterrat

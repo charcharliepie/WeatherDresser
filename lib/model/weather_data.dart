@@ -6,8 +6,9 @@ class WeatherData {
   final double maxTemp;
   final String main;
   final String icon;
+  final String description;
 
-  WeatherData({this.date, this.name, this.temp, this.minTemp, this.maxTemp, this.main, this.icon});
+  WeatherData({this.date, this.name, this.temp, this.minTemp, this.maxTemp, this.main, this.icon, this.description});
 
   factory WeatherData.fromJson(Map<String, dynamic> json) {
     return WeatherData(
@@ -18,6 +19,7 @@ class WeatherData {
       maxTemp: (json['main']['temp_max'].toDouble() - 273.15),
       main: json['weather'][0]['main'],
       icon: json['weather'][0]['icon'],
+      description: json['weather'][0]['description'],
     );
   }
 }

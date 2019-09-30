@@ -5,7 +5,7 @@ import 'package:weather_dresser/model/weather_data.dart';
 
 class Weather extends StatelessWidget {
 
-  final WeatherData weather;
+  WeatherData weather;
 
   Weather({Key key, @required this.weather}) : super(key: key);
 
@@ -23,7 +23,7 @@ class Weather extends StatelessWidget {
         
         Padding(
           padding: EdgeInsets.all(20.0),
-          child: Text(weather.name.toUpperCase(), style: new TextStyle(color: txtColor, fontSize: 22.0, fontFamily: 'Monsterrat')),),
+          child: Text((weather.name != null) ? weather.name.toUpperCase() : "", style: new TextStyle(color: txtColor, fontSize: 22.0, fontFamily: 'Monsterrat')),),
 
         Row(
             mainAxisAlignment: MainAxisAlignment.center,
