@@ -19,7 +19,7 @@ class Weather extends StatelessWidget {
         Padding(
           padding: EdgeInsets.all(20.0),
           child: Image.asset('assets/img/${weather.icon}.png', height: 200,),),
-        Text('${weather.temp.toString()}°', style: new TextStyle(color: txtColor, fontSize: 58.0, fontFamily: 'Monsterrat', fontWeight: FontWeight.w200)),
+        Text('${weather.temp.toStringAsFixed(1)}°', style: new TextStyle(color: txtColor, fontSize: 58.0, fontFamily: 'Monsterrat', fontWeight: FontWeight.w200)),
         
         Padding(
           padding: EdgeInsets.all(20.0),
@@ -29,8 +29,8 @@ class Weather extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
 
           children: <Widget>[
-            Text('\u{25BC} min:${weather.minTemp}°', style: new TextStyle(color: txtColor, fontFamily: 'Monsterrat')),
-            Text(' \u{25B2} max:${weather.maxTemp.toString()}°', style: new TextStyle(color: txtColor, fontFamily: 'Monsterrat')),
+            Text('\u{25BC} min:${weather.minTemp.toStringAsFixed(1)}°', style: new TextStyle(color: txtColor, fontFamily: 'Monsterrat')),
+            Text(' \u{25B2} max:${weather.maxTemp.toStringAsFixed(1)}°', style: new TextStyle(color: txtColor, fontFamily: 'Monsterrat')),
           ],
         )
         
