@@ -7,12 +7,6 @@ class WeatherData {
   final String main;
   final String icon;
 
-  // convert Kelvin to Celsius
-  //final double tempCel = temp - 273.1;
-  //final double minTempCel = minTemp - 273.1;
-  //final double maxTempCel = maxTemp - 273.1;
-  
-
   WeatherData({this.date, this.name, this.temp, this.minTemp, this.maxTemp, this.main, this.icon});
 
   factory WeatherData.fromJson(Map<String, dynamic> json) {
