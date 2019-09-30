@@ -30,7 +30,7 @@ class Weather extends StatelessWidget {
 
           children: <Widget>[
             Text('\u{25BC} min:${weather.minTemp}°', style: new TextStyle(color: txtColor, fontFamily: 'Monsterrat')),
-            Text('\u{25B2} max:${weather.maxTemp.toString()}°', style: new TextStyle(color: txtColor, fontFamily: 'Monsterrat')),
+            Text(' \u{25B2} max:${weather.maxTemp.toString()}°', style: new TextStyle(color: txtColor, fontFamily: 'Monsterrat')),
           ],
         )
         

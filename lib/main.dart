@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:animated_splash/animated_splash.dart';
 import 'dart:convert';
 import 'package:line_icons/line_icons.dart';
+import 'package:location/location.dart';
+import 'package:flutter/services.dart';
 
 
 import 'package:weather_dresser/widgets/weather.dart';
@@ -80,6 +84,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool isLoading = false;
   WeatherData weatherData;
+  Location _location = new Location();
+  String error;
 
   @override
   void initState() {
@@ -128,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   );
                 } else {
-                  this.actionIcon = new Icon(LineIcons.search);
+                  this.actionIcon = new Icon(Icons.search);
                   this.appBarTitle = new Text("天気ワードローブ", style: TextStyle(color: txtColor, fontWeight: FontWeight.w300),);
                 }
               });
@@ -188,12 +194,36 @@ class _MyHomePageState extends State<MyHomePage> {
       isLoading = true;
     });
 
-    final lat = 40.730610;
-    final lon = -73.935242;
+    Map<String,double> location;
+
+    try {
+      location = await _location.getLocation();
+
+      error = null;
+    } on PlatformException catch (e) {
+      if (e.code == 'PERMISSION_DENIED') {
+        error = 'Permission denied';
+      } else if (e.code == 'PERMISSION_DENIED_NEVER_ASK') {
+        error = 'Permission denied - please ask the user to enable it from the app settings';
+      }
+
+      location = null;
+    }
+
+    if (location != null) {
+      final lat = location['latitude'];
+      final lon = location['longitude'];
+    
+
+    // final lat = 40.730610;
+    // final lon = -73.935242;
+    // Melb -37.809588 -37.809588
+
     final weatherResponse = await http.get(
         'https://api.openweathermap.org/data/2.5/weather?APPID=931dd482db9863c889f68196f104be72&lat=${lat
             .toString()}&lon=${lon.toString()}');
 /*https://api.openweathermap.org/data/2.5/weather?APPID=931dd482db9863c889f68196f104be72&lat=40.730610&lon=-73.935242 */ 
+// api key 931dd482db9863c889f68196f104be72
 
     if (weatherResponse.statusCode == 200) {
       return setState(() {
@@ -206,4 +236,5 @@ class _MyHomePageState extends State<MyHomePage> {
       isLoading = false;
     });
   }
+}
 }
