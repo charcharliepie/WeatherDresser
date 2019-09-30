@@ -220,8 +220,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // Melb -37.809588 -37.809588
 
     final weatherResponse = await http.get(
-        'https://api.openweathermap.org/data/2.5/weather?APPID=931dd482db9863c889f68196f104be72&lat=${lat
-            .toString()}&lon=${lon.toString()}');
+        'http://127.0.0.1:3000/api/weather/now?lat=${lat.toString()}&lon=${lon.toString()}');
 /*https://api.openweathermap.org/data/2.5/weather?APPID=931dd482db9863c889f68196f104be72&lat=40.730610&lon=-73.935242 */ 
 // api key 931dd482db9863c889f68196f104be72
 
