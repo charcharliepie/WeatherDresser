@@ -9,7 +9,9 @@ final bgColor = const Color(0xFFEAEAEA);
 final accentColor = const Color(0xFF093BB1);
 final txtColor = const Color(0xFF2F2F2F);
 
-void main() {
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
   // do something while loading splash screen
   Function duringSplash = () {
     print('Something background process');
@@ -23,27 +25,34 @@ void main() {
   };
 
   Map<int, Widget> op = {1: TabBarDemo()};
-
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    theme: new ThemeData(
-      backgroundColor: txtColor,
-    ),
-    home: AnimatedSplash(
-      imagePath: 'assets/img/launchscreen-logo.png',
-      home: TabBarDemo(),
-      customFunction: duringSplash,
-      duration: 3000,
-      type: AnimatedSplashType.BackgroundProcess,
-      outputAndHome: op,
-    ),
-  ));
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: AnimatedSplash(
+        imagePath: 'assets/img/launchscreen-logo.png',
+        home: TabBarDemo(),
+        customFunction: duringSplash,
+        duration: 3000,
+        type: AnimatedSplashType.BackgroundProcess,
+        outputAndHome: op,
+      ),
+      debugShowCheckedModeBanner: false,
+    );
+  }
 }
 
 class TabBarDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+          backgroundColor: txtColor,
+          primaryColor: txtColor,
+          accentColor: accentColor,
+          fontFamily: 'Monsterrat',
+          buttonBarTheme:
+              ButtonBarThemeData(buttonTextTheme: ButtonTextTheme.accent),
+          buttonTheme: ButtonThemeData(buttonColor: accentColor)),
       home: DefaultTabController(
         length: 2,
         child: Scaffold(

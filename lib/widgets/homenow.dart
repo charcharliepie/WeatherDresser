@@ -6,7 +6,6 @@ import 'package:location/location.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 
-
 import 'package:weather_dresser/model/globals.dart' as globals;
 import 'package:weather_dresser/widgets/weather.dart';
 import 'package:weather_dresser/model/weather_data.dart';
@@ -33,6 +32,7 @@ class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
+
 class _MyHomePageState extends State<MyHomePage> {
   bool isLoading = true;
   WeatherData weatherData;
@@ -54,7 +54,10 @@ class _MyHomePageState extends State<MyHomePage> {
     loadWeather();
   }
 
-  Widget appBarTitle = new Text("Today Weather Dresser", style: TextStyle(color: txtColor, fontWeight: FontWeight.w300),);
+  Widget appBarTitle = new Text(
+    "TODAY天気ワードローブ",
+    style: TextStyle(color: txtColor, fontWeight: FontWeight.w300),
+  );
   Icon actionIcon = new Icon(Icons.search);
 
   @override
@@ -62,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return new Scaffold(
       backgroundColor: bgColor,
       appBar: new AppBar(
-        title:  appBarTitle,
+        title: appBarTitle,
         backgroundColor: bgColor,
         elevation: 0.0,
         actions: <Widget>[
@@ -73,121 +76,137 @@ class _MyHomePageState extends State<MyHomePage> {
               // display input field
               setState(() {
                 if (this.actionIcon.icon == Icons.search) {
-                  this.actionIcon = new Icon(Icons.close);
-
+                  this.actionIcon = new Icon(Icons.cancel);
                   this.appBarTitle = new TextFormField(
-                    controller: cityTextFieldController,
-                    textInputAction: TextInputAction.done,
-                    style: new TextStyle(
-                      color: txtColor,
-                    ),
-                    decoration: new InputDecoration(
-                      prefixIcon: new Icon(Icons.search),
-                      labelText: "Enter city..",
-                      labelStyle: new TextStyle(color: txtColor),
-                      hintText: "e.g. Melbourne",
-                      hintStyle: new TextStyle(color: txtColor),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: txtColor),
+                      controller: cityTextFieldController,
+                      textInputAction: TextInputAction.done,
+                      style: new TextStyle(
+                        color: txtColor,
                       ),
-                    ),
-                    onFieldSubmitted: (value){
-                      loadCityWeather(value);
-                    }
-                  );
+                      decoration: new InputDecoration(
+                        prefixIcon: new Icon(Icons.search, color: txtColor),
+                        labelText: "Enter city..",
+                        labelStyle: new TextStyle(color: txtColor),
+                        hintText: "e.g. Melbourne",
+                        hintStyle: new TextStyle(color: txtColor),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: txtColor),
+                        ),
+                      ),
+                      onFieldSubmitted: (value) {
+                        loadCityWeather(value);
+                      });
                 } else {
-                  this.actionIcon = new Icon(Icons.search);
+                  this.actionIcon = Icon(Icons.search);
+                  appBarTitle = Text(
+                    "TODAY天気ワードローブ",
+                    style:
+                        TextStyle(color: txtColor, fontWeight: FontWeight.w300),
+                  );
                 }
               });
-            },           
+            },
           )
         ],
       ),
       body: new Center(
-        child: new Column(
-            mainAxisSize: MainAxisSize.max,
+          child: new Column(mainAxisSize: MainAxisSize.max, children: <Widget>[
+        new Expanded(
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Expanded(
-                child: new Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    new Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      // weather widget
-                      child: weatherData != null ? new Weather(weather: weatherData) : Container(),
-                    ),
-                    new Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: isLoading ? CircularProgressIndicator(
+              new Padding(
+                padding: const EdgeInsets.all(8.0),
+                // weather widget
+                child: weatherData != null
+                    ? new Weather(weather: weatherData)
+                    : Container(),
+              ),
+              new Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: isLoading
+                    ? CircularProgressIndicator(
                         strokeWidth: 1.0,
                         valueColor: new AlwaysStoppedAnimation(Colors.black),
-                      ) : IconButton(
+                      )
+                    : IconButton(
                         icon: new Icon(LineIcons.refresh),
                         tooltip: 'Refresh',
                         onPressed: loadWeather,
                         color: txtColor,
                       ),
-                    ),
-                    new Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: isLoading ? Container() : OutlineButton(
+              ),
+              new Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: isLoading
+                    ? Container()
+                    : OutlineButton(
                         borderSide: BorderSide(color: accentColor, width: 0.8),
                         textColor: Colors.white,
-                        shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(0.0)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(0.0)),
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => OutfitPage(weatherDataObject: weatherData)));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => OutfitPage(
+                                      weatherDataObject: weatherData)));
                           //Navigator.of(context).push(new OutfitPageRoute());
-                          
                         },
                         child: Text(
                           "  MY OOTD FOR TODAY ",
-                          style: TextStyle(color: accentColor, fontFamily: 'Monsterrat', fontWeight: FontWeight.w400),
+                          style: TextStyle(
+                              color: accentColor,
+                              fontFamily: 'Monsterrat',
+                              fontWeight: FontWeight.w400),
                         ),
                       ),
-                    ),
-                  ],
-                ),
               ),
-            ]
-          )   
+            ],
+          ),
         ),
+      ])),
     );
   }
 
   loadWeather() async {
+    Map<String, double> location;
 
-      Map<String,double> location;
+    try {
+      location = await _location.getLocation();
 
-      try {
-        location = await _location.getLocation();
-
-        error = null;
-      } on PlatformException catch (e) {
-        if (e.code == 'PERMISSION_DENIED') {
-          error = 'Permission denied';
-        } else if (e.code == 'PERMISSION_DENIED_NEVER_ASK') {
-          error = 'Permission denied - please ask the user to enable it from the app settings';
-        }
-
-        location = null;
+      error = null;
+    } on PlatformException catch (e) {
+      if (e.code == 'PERMISSION_DENIED') {
+        error = 'Permission denied';
+      } else if (e.code == 'PERMISSION_DENIED_NEVER_ASK') {
+        error =
+            'Permission denied - please ask the user to enable it from the app settings';
       }
 
-      if (location != null) {
-        var lat = location['latitude'];
-        var lon = location['longitude'];
+      location = null;
+    }
 
-        var weatherResponse = await http.get('${globals.microserviceBaseUrl}/api/weather/now?lat=${lat.toString()}&lon=${lon.toString()}');
+    if (location != null) {
+      var lat = location['latitude'];
+      var lon = location['longitude'];
+
+      var weatherResponse = await http.get(
+          '${globals.microserviceBaseUrl}/api/weather/now?lat=${lat.toString()}&lon=${lon.toString()}');
 
       if (weatherResponse.statusCode == 200) {
-        return setState(() {
-          weatherData = new WeatherData.fromJson(jsonDecode(weatherResponse.body));
-          isLoading = false;
-        });
+        return (!this.mounted)
+            ? false
+            : setState(() {
+                weatherData =
+                    new WeatherData.fromJson(jsonDecode(weatherResponse.body));
+                isLoading = false;
+              });
       } else {
         return showDialog(
           context: context,
           builder: (context) {
-             setState(() {
+            setState(() {
               isLoading = false;
             });
             return AlertDialog(
@@ -196,19 +215,19 @@ class _MyHomePageState extends State<MyHomePage> {
           },
         );
       }
-      
     }
   }
 
-  loadCityWeather(String cityName) async {
+  Future<dynamic> loadCityWeather(String cityName) async {
+    final cityWeatherResponse = await http.get(
+        '${globals.microserviceBaseUrl}/api/weather/citynow?city=${cityName.toString()}',
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        });
 
-    final cityWeatherResponse = await http.get('${globals.microserviceBaseUrl}/api/weather/citynow?city=${cityName.toString()}');
-
-    if (cityWeatherResponse.statusCode == 200) {
-      return setState(() {
-        weatherData = new WeatherData.fromJson(jsonDecode(cityWeatherResponse.body));
-      });
-    } else {
+    var data = WeatherData.getCode(jsonDecode(cityWeatherResponse.body));
+    if (data.cod != "200") {
       return showDialog(
         context: context,
         builder: (context) {
@@ -217,10 +236,11 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         },
       );
-    } 
+    } else {
+      return setState(() {
+        weatherData =
+            WeatherData.fromJson(jsonDecode(cityWeatherResponse.body));
+      });
+    }
   }
-
 }
-
-
-  
