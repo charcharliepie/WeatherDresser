@@ -76,7 +76,7 @@ class _MyHomePageStateTomorrow extends State<MyHomePageTomorrow> {
               // display input field
               setState(() {
                 if (this.actionIcon.icon == Icons.search) {
-                  this.actionIcon = new Icon(Icons.close);
+                  this.actionIcon = new Icon(Icons.cancel);
                   this.appBarTitle = new TextFormField(
                       controller: cityTextFieldTomorrowController,
                       textInputAction: TextInputAction.done,
@@ -98,6 +98,11 @@ class _MyHomePageStateTomorrow extends State<MyHomePageTomorrow> {
                       });
                 } else {
                   this.actionIcon = new Icon(Icons.search);
+                  appBarTitle = Text(
+                    "TOMORROW天気ワードローブ",
+                    style:
+                        TextStyle(color: txtColor, fontWeight: FontWeight.w300),
+                  );
                 }
               });
             },
