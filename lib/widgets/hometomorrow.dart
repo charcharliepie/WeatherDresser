@@ -28,7 +28,6 @@ class MyHomePageTomorrow extends StatefulWidget {
   // always marked "final".
 
   final String title;
-
   @override
   _MyHomePageStateTomorrow createState() => _MyHomePageStateTomorrow();
 }
@@ -192,7 +191,7 @@ class _MyHomePageStateTomorrow extends State<MyHomePageTomorrow> {
       var lon = location['longitude'];
 
       var weatherResponse = await http.get(
-          '${globals.microserviceBaseUrl}/api/weather/now?lat=${lat.toString()}&lon=${lon.toString()}');
+          '${globals.microserviceBaseUrl}/api/weather/tomorrow?lat=${lat.toString()}&lon=${lon.toString()}');
 
       if (weatherResponse.statusCode == 200) {
         return (!this.mounted)
@@ -223,7 +222,9 @@ class _MyHomePageStateTomorrow extends State<MyHomePageTomorrow> {
         '${globals.microserviceBaseUrl}/api/weather/citytomorrow?city=${cityName.toString()}');
 
     if (cityWeatherResponse.statusCode == 200) {
-      return setState(() {
+      return (!this.mounted)
+            ? false
+            : setState(() {
         weatherDataTomorrow =
             new WeatherData.fromJson(jsonDecode(cityWeatherResponse.body));
       });

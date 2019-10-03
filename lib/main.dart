@@ -64,6 +64,7 @@ class TabBarDemo extends StatelessWidget {
           ),
         ),
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

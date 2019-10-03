@@ -6,7 +6,6 @@ import 'package:weather_dresser/model/weather_data.dart';
 class Weather extends StatelessWidget {
 
   WeatherData weather;
-
   Weather({Key key, @required this.weather}) : super(key: key);
 
   @override
