@@ -95,13 +95,13 @@ class _OutfitPage extends State<OutfitPage> {
                                 child: Column(children: <Widget>[
                                   Padding(
                                     padding: const EdgeInsets.all(0),
-                                    child: Text(
-                                      _imageTitles[index],
-                                      style: TextStyle(
-                                          color: txtColor,
-                                          fontFamily: 'Monsterrat',
-                                          fontWeight: FontWeight.w300),
-                                    ),
+//                                    child: Text(
+//                                      _imageTitles[index],
+//                                      style: TextStyle(
+//                                          color: txtColor,
+//                                          fontFamily: 'Monsterrat',
+//                                          fontWeight: FontWeight.w300),
+//                                    ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(0),
@@ -123,6 +123,25 @@ class _OutfitPage extends State<OutfitPage> {
                         constraints: new BoxConstraints.loose(
                             new Size(screenWidth, screenWidth))),
               ),
+//              Padding(
+//                padding: const EdgeInsets.all(8.0),
+//                child: OutlineButton(
+//                  borderSide: BorderSide(color: accentColor, width: 0.8),
+//                  textColor: Colors.white,
+//                  shape: RoundedRectangleBorder(
+//                      borderRadius: new BorderRadius.circular(0.0)),
+//                  onPressed: () {
+//                    Navigator.pop(context);
+//                  },
+//                  child: Text(
+//                    "  BACK  ",
+//                    style: TextStyle(
+//                        color: accentColor,
+//                        fontFamily: 'Monsterrat',
+//                        fontWeight: FontWeight.w400),
+//                  ),
+//                ),
+//              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: OutlineButton(
@@ -130,11 +149,9 @@ class _OutfitPage extends State<OutfitPage> {
                   textColor: Colors.white,
                   shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(0.0)),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
+                  onPressed: loadDress,
                   child: Text(
-                    "  BACK  ",
+                    "  SHOW ME ANOTHER  ",
                     style: TextStyle(
                         color: accentColor,
                         fontFamily: 'Monsterrat',
