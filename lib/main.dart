@@ -12,6 +12,7 @@ final txtColor = const Color(0xFF2F2F2F);
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  // package: https://pub.dev/packages/animated_splash
   // do something while loading splash screen
   Function duringSplash = () {
     print('Something background process');
