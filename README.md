@@ -1,16 +1,10 @@
 # Weather Dresser
 
-A new Flutter project.
+Weather Dresser tells you what to wear everyday based on the real-time weather. 
 
-## Getting Started
+Melbourne is famous for its unpredictable ‘4-seasons-in-a-day’ weather, every Melbournian can relate to how important it is to check real-time weather every morning before we go out so we can pick the right clothes. To save your time in every rush morning, you will be shown matched outfits images according to different weather conditions a real-time so to avoid wearing the wrong outfit for the day. 
 
-This project is a starting point for a Flutter application.
+Microservices
+https://github.com/charcharliepie/WeatherDresser-Microservices
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Please use `npm run dev` to run service first before running Flutter debugging mode.
