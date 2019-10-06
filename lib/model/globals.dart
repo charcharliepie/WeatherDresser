@@ -1,5 +1,10 @@
 library weather_dresser.globals;
 
-String microserviceBaseUrl = "http://127.0.0.1:3000"; // local microservice
-// mac local http://127.0.0.1:3000
-// monash http://103.35.230.242:3000
+// mac local service for ios simulator
+String microserviceBaseUrl = "http://127.0.0.1:3000";
+
+// mac local service for samsung
+// String microserviceBaseUrl = "http://192.168.0.10:3000";
+
+// android simulator*** 
+// String microserviceBaseUrl = "http://10.0.2.2:3000";

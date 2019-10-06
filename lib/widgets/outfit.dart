@@ -74,7 +74,7 @@ class _OutfitPage extends State<OutfitPage> {
                 child: isLoading
                     ? Container()
                     : Text(
-                        'This ${dressCode} weather today is perfect for:',
+                        'This weather like this is perfect for:',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: txtColor,
@@ -123,25 +123,6 @@ class _OutfitPage extends State<OutfitPage> {
                         constraints: new BoxConstraints.loose(
                             new Size(screenWidth, screenWidth))),
               ),
-//              Padding(
-//                padding: const EdgeInsets.all(8.0),
-//                child: OutlineButton(
-//                  borderSide: BorderSide(color: accentColor, width: 0.8),
-//                  textColor: Colors.white,
-//                  shape: RoundedRectangleBorder(
-//                      borderRadius: new BorderRadius.circular(0.0)),
-//                  onPressed: () {
-//                    Navigator.pop(context);
-//                  },
-//                  child: Text(
-//                    "  BACK  ",
-//                    style: TextStyle(
-//                        color: accentColor,
-//                        fontFamily: 'Monsterrat',
-//                        fontWeight: FontWeight.w400),
-//                  ),
-//                ),
-//              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: OutlineButton(
@@ -168,7 +149,7 @@ class _OutfitPage extends State<OutfitPage> {
 
   loadDress() async {
     final dresserResponse = await http.get(
-        'http://127.0.0.1:3000/api/dress/code?temp=${widget.weatherDataObject.temp.toString()}&description=${widget.weatherDataObject.description}');
+        '${globals.microserviceBaseUrl}/api/dress/code?temp=${widget.weatherDataObject.temp.toString()}&description=${widget.weatherDataObject.description}');
 
     if (dresserResponse.statusCode == 200) {
       return setState(() {
